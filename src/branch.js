@@ -29,15 +29,13 @@ export default class Branch {
     }
 
     addCustomerTransaction (customerId, amount) {
-        // console.log(this.#customers[0].getName());
-        // const targetCustomer = this.#customers.find(
-        //     (customer) => customer.name === customerId);
-        //     console.log(`${targetCustomer.name}`);     
-        // if (targetCustomer) {
-        //     targetCustomer.addTransaction(amount)
-        //     return true;
-        // } else {
-        //      return false;
-        //     }
+        const targetCustomer = this.#customers.find(
+            (customer) => customer.getId() === customerId); 
+        if (targetCustomer) {
+            targetCustomer.addTransaction(amount)
+            return true;
+        } else {
+             return false;
+            }
         }   
     }

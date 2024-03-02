@@ -1,5 +1,6 @@
 import  Branch  from "./branch.js";
 import Customer from "./customer.js";
+console.log("++++++++++++++++++++++++++++++++++++Bank System+++++++++++++++++++++++++++++++++++++");
 class Bank {
 #name;
 #branches
@@ -13,20 +14,18 @@ class Bank {
             if (!this.#branches.includes(branch)) {
                 const result = this.#branches.push(branch);
                 result > 0 ? true : false
+                console.log(`${branch.getName()} Added`);
                 return result;
                 } 
-                throw "Branch Already Exist"
+                throw `${branch.getName()} Already Exist\n`
             } catch (error) {
                 console.log(error);
         }
     }
 
     findBranchByName(branchName) {
-        // const targetBranch = this.#branches.find((branch) => branch.getName() === branchName);
         branchName = branchName.toLowerCase().trim();
         const targetBranch = this.#branches.filter((branch) => branch.getName().toLowerCase().includes(branchName));
-        // console.log(searchedTask[0].getName());
-        // console.log(targetBranch);
         return targetBranch;
     }
 
@@ -50,24 +49,38 @@ class Bank {
 
     addCustomerTransaction(branch, customerId, amount) {
         try {
-            // console.log(branch.getName());
-            const targetBranch = this.findBranchByName(branch.getName());
-            if (targetBranch === undefined) {
-                throw "Branch dose not exist"
+            if (this.#branches.includes(branch)) {
+                if (branch.addCustomerTransaction(customerId, amount)) {
+                    return "Transaction Was Successful"
+                } else {
+                    return `Transaction Failed, You do not have an account in ${branch.getName()}`
+                }
             } else {
-                console.log(targetBranch[0].addCustomerTransaction(customerId, amount));
-                // return targetBranch[0].addCustomerTransaction(customerId, amount);
+                throw "Transactions can not be done duo to unavailabilities of the Branch"
             }
         } catch (error) {
-            return false;
+            return error;
         }
     }
 
     listCustomers(branch, includeTransactions) {
         if (includeTransactions) {
-            const targetBranch = this.findBranchByName(branch);
-            if (targetBranch) {
-                console.log(`${targetBranch.name} : ${targetBranch.amount}`);
+            // const customers = targetBranch[0].getCustomers();
+            if (this.#branches.includes(branch)) {
+                const customers = branch.getCustomers()
+                
+                // Display
+                console.log("Branch:- " + branch.getName() +  ":\n");
+                customers.forEach((customer) => {
+                    if (customer.getTransaction().length > 0) {
+                        console.log("Customer Name: " + customer.getName() + ", Customer ID: " + customer.getId());
+                        console.log(customer.getTransaction());
+                    } else {-
+                        console.log("Customer Name: " + customer.getName() + ", Customer ID: " + customer.getId());
+                        console.log("No Data ara Available");
+                    }
+                });
+                    console.log("-------------------------------------------------------------------");
             }
         } else {
             console.log("no customers");
@@ -86,25 +99,25 @@ arizonaBank.addBranch(westBranch)
 arizonaBank.addBranch(sunBranch)
 arizonaBank.addBranch(westBranch) 
 
-// console.log(westBranch.getName());
+arizonaBank.findBranchByName("bank")
+arizonaBank.findBranchByName("sun")
 
-// console.log(arizonaBank.findBranchByName("westBranch"));
-// console.log(arizonaBank.findBranchByName("Sun Branch"));
-
-// arizonaBank.findBranchByName("bank")
-// arizonaBank.findBranchByName("sun")
 
 arizonaBank.addCustomer(westBranch, customer1)
 arizonaBank.addCustomer(westBranch, customer3)
 arizonaBank.addCustomer(sunBranch, customer1)
 arizonaBank.addCustomer(sunBranch, customer2)
-// console.log(customer1.getId());
-// console.log(arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 3000));
-// arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 3000);
-// arizonaBank.addCustomerTransaction(westBranch, customer1.getId, 2000)
-// arizonaBank.addCustomerTransaction(westBranch, customer2.getId, 3000)
 
-// customer1.addTransaction(-1000);
-// console.log(customer1.getBalance())
-// console.log(arizonaBank.listCustomers(westBranch, true))
-// console.log(arizonaBank.listCustomers(sunBranch,true))
+console.log("-------------------------------------------------------------------");
+
+console.log(arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 3000));
+console.log(arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 3000));
+console.log(arizonaBank.addCustomerTransaction(westBranch, customer2.getId(), 3000));
+
+console.log("-------------------------------------------------------------------");
+
+customer1.addTransaction(-1000);
+console.log("\nThe Balance for customer: " + customer1.getName() + ", is: " + customer1.getBalance() + " SAR\n");
+console.log("-------------------------------------------------------------------");
+arizonaBank.listCustomers(westBranch, true)
+arizonaBank.listCustomers(sunBranch, true)

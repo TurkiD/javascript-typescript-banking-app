@@ -47,12 +47,3 @@ export default class Customer{
         return isSuccessful > 0 ? true : false
     }
 }
-
-// export default addTransaction;
-// const c1 = new Customer('turki', 101);
-// console.log(c1.getName());
-// c1.addTransaction(1000);
-// c1.addTransaction(2000);
-// console.log(c1.getTransaction());
-// console.log(c1.addTransaction(-3000));
-// console.log(c1.getBalance());
