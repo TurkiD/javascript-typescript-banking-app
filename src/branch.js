@@ -19,26 +19,25 @@ export default class Branch {
         try {  
         if (!this.#customers.includes(customer)) {
             const result = this.#customers.push(customer);
-            result > 0 ? true : false
-            return result;
+            return result > 0 ? true : false
             } 
-            throw "Customer Already Exist"
+            throw "Could not add a customer"
         } catch (error) {
             console.log(error);
+            return false;
         }
-        return result;
     }
 
     addCustomerTransaction (customerId, amount) {
-        const customer = this.#customers.find(
-            (customer) => customer.id === customerId);     
-        if (customer) {
-            customer.addTransaction(amount)
-            return true;
-        } else {
-             return false;
-            }
+        // console.log(this.#customers[0].getName());
+        // const targetCustomer = this.#customers.find(
+        //     (customer) => customer.name === customerId);
+        //     console.log(`${targetCustomer.name}`);     
+        // if (targetCustomer) {
+        //     targetCustomer.addTransaction(amount)
+        //     return true;
+        // } else {
+        //      return false;
+        //     }
         }   
     }
-
-// export default addCustomerTransaction;

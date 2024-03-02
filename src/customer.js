@@ -3,8 +3,7 @@
 
 // Import using module
 import Transaction from "./transaction.js";
-console.log(Transaction);
-class Customer{
+export default class Customer{
 #name
 #id
 #transactions
@@ -15,15 +14,14 @@ class Customer{
     }
 
     getName() {
-        return this.name;
+        return this.#name;
     }
 
     getId() {
-        return this.id;
+        return this.#id;
     }
     
     getTransaction() {
-        // console.log(this.#transactions);
         return this.#transactions;
     }
 
@@ -50,8 +48,10 @@ class Customer{
     }
 }
 
-const c1 = new Customer('turki', 101);
-// c1.addTransaction(1000)
+// export default addTransaction;
+// const c1 = new Customer('turki', 101);
+// console.log(c1.getName());
+// c1.addTransaction(1000);
 // c1.addTransaction(2000);
 // console.log(c1.getTransaction());
 // console.log(c1.addTransaction(-3000));
