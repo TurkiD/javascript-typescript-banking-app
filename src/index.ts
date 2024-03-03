@@ -25,9 +25,9 @@ arizonaBank.addCustomer(sunBranch, customer2)
 
 console.log("-------------------------------------------------------------------");
 
-console.log(arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 3000));
-console.log(arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 3000));
-console.log(arizonaBank.addCustomerTransaction(westBranch, customer2.getId(), 3000));
+arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 3000);
+arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 3000);
+arizonaBank.addCustomerTransaction(westBranch, customer2.getId(), 3000);
 
 console.log("-------------------------------------------------------------------");
 

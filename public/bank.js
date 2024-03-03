@@ -75,11 +75,17 @@ class Bank {
                     console.log("Branch:- " + branch.getName() + ":\n");
                     customers.forEach((customer) => {
                         if (customer.getTransaction().length > 0) {
-                            console.log("Customer Name: " + customer.getName() + ", Customer ID: " + customer.getId());
+                            console.log("Customer Name: " +
+                                customer.getName() +
+                                ", Customer ID: " +
+                                customer.getId());
                             console.log(customer.getTransaction());
                         }
                         else {
-                            -console.log("Customer Name: " + customer.getName() + ", Customer ID: " + customer.getId());
+                            -console.log("Customer Name: " +
+                                customer.getName() +
+                                ", Customer ID: " +
+                                customer.getId());
                             console.log("No Data ara Available");
                         }
                     });
