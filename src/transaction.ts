@@ -3,11 +3,15 @@
 
 // Import using module
 export default class Transaction{
-#amount;
-#date
-    constructor (amount) {
+private amount: number;
+private date: Date;
+    constructor (amount: number) {
         this.amount = amount;
         this.date = new Date();
+    }
+    
+    getAmount() {
+        return this.amount;
     }
 }
 

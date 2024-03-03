@@ -2,48 +2,47 @@
 // const Transaction = require("./transaction.js");
 
 // Import using module
-import Transaction from "./transaction.js";
+import Transaction from "./transaction";
 export default class Customer{
-#name
-#id
-#transactions
-    constructor (name, id) {
-        this.#transactions = [];
-        this.#name = name;
-        this.#id = id
+private name: string;
+private id: number
+private transactions: Transaction[]
+    constructor (name: string, id: number) {
+        this.transactions = [];
+        this.name = name;
+        this.id = id
     }
 
     getName() {
-        return this.#name;
+        return this.name;
     }
 
     getId() {
-        return this.#id;
+        return this.id;
     }
     
     getTransaction() {
-        return this.#transactions;
+        return this.transactions;
     }
 
     // return the balance
     getBalance() {
-        return this.#transactions.reduce((total, transaction) => 
-            total + transaction.amount, 0)
+        return this.transactions.reduce((total, transaction) => 
+            total + transaction.getAmount(), 0)
     }
 
     // add transactions and return result of transaction as boolean
     // also add some validation so we can not go to a negative balance
-    addTransaction(amount) {
-        let isSuccessful;
+    addTransaction(amount: number) {
         try {
             if (amount < 0 && this.getBalance() + amount < 0) {
                 throw "You do not have enough balance"
             } else {
-                isSuccessful = this.#transactions.push(new Transaction(amount));
+                const isSuccessful = this.transactions.push(new Transaction(amount));
+                return isSuccessful > 0 ? true : false
             }
         } catch (error) {
             console.error(error);
         }
-        return isSuccessful > 0 ? true : false
     }
 }

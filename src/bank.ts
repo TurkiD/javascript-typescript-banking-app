@@ -2,17 +2,17 @@ import  Branch  from "./branch.js";
 import Customer from "./customer.js";
 console.log("++++++++++++++++++++++++++++++++++++Bank System+++++++++++++++++++++++++++++++++++++");
 class Bank {
-#name;
-#branches
-    constructor(name) {
-        this.#branches = [];
-        this.#name = name;
+private name: string;
+private branches: Branch[];
+    constructor(name: string) {
+        this.branches = [];
+        this.name = name;
     } 
 
-    addBranch(branch) {
+    addBranch(branch: Branch) {
         try {  
-            if (!this.#branches.includes(branch)) {
-                const result = this.#branches.push(branch);
+            if (!this.branches.includes(branch)) {
+                const result = this.branches.push(branch);
                 result > 0 ? true : false
                 console.log(`${branch.getName()} Added`);
                 return result;
@@ -23,21 +23,21 @@ class Bank {
         }
     }
 
-    findBranchByName(branchName) {
+    findBranchByName(branchName: string) {
         branchName = branchName.toLowerCase().trim();
-        const targetBranch = this.#branches.filter((branch) => branch.getName().toLowerCase().includes(branchName));
+        const targetBranch = this.branches.filter((branch) => branch.getName().toLowerCase().includes(branchName));
         return targetBranch;
     }
 
-    checkBranch(branch) {
-        return this.#branches.includes(branch)
+    checkBranch(branch: Branch) {
+        return this.branches.includes(branch)
     }
 
-    addCustomer(branch, customer) {
+    addCustomer(branch: Branch, customer: Customer) {
         try {
-            if (this.#branches.includes(branch)) {
+            if (this.checkBranch(branch)) {
                 const result = branch.addCustomer(customer);
-                return result > 0 ? true : false;
+                return result
             }
             throw `Something went wrong while adding a customer ${customer.getName()}
                     to the branch ${branch.getName()}`
@@ -47,9 +47,9 @@ class Bank {
         }
     }
 
-    addCustomerTransaction(branch, customerId, amount) {
+    addCustomerTransaction(branch: Branch, customerId: number, amount: number) {
         try {
-            if (this.#branches.includes(branch)) {
+            if (this.checkBranch(branch)) {
                 if (branch.addCustomerTransaction(customerId, amount)) {
                     return "Transaction Was Successful"
                 } else {
@@ -63,10 +63,10 @@ class Bank {
         }
     }
 
-    listCustomers(branch, includeTransactions) {
+    listCustomers(branch: Branch, includeTransactions: boolean) {
         if (includeTransactions) {
             // const customers = targetBranch[0].getCustomers();
-            if (this.#branches.includes(branch)) {
+            if (this.checkBranch(branch)) {
                 const customers = branch.getCustomers()
                 
                 // Display

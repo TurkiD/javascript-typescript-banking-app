@@ -1,24 +1,24 @@
 import Customer from "./customer.js";
 export default class Branch {
-    #name;
-    #customers
-    constructor(name) {
-        this.#customers = [];
-        this.#name = name;
+    private name: string;
+    private customers: Customer[]
+    constructor(name: string) {
+        this.customers = [];
+        this.name = name;
     } 
 
     getName() {
-        return this.#name;
+        return this.name;
     }
 
     getCustomers() {
-        return this.#customers
+        return this.customers
     }
 
-    addCustomer(customer) {
+    addCustomer(customer: Customer) {
         try {  
-        if (!this.#customers.includes(customer)) {
-            const result = this.#customers.push(customer);
+        if (!this.customers.includes(customer)) {
+            const result = this.customers.push(customer);
             return result > 0 ? true : false
             } 
             throw "Could not add a customer"
@@ -28,8 +28,8 @@ export default class Branch {
         }
     }
 
-    addCustomerTransaction (customerId, amount) {
-        const targetCustomer = this.#customers.find(
+    addCustomerTransaction (customerId: number, amount: number) {
+        const targetCustomer = this.customers.find(
             (customer) => customer.getId() === customerId); 
         if (targetCustomer) {
             targetCustomer.addTransaction(amount)
