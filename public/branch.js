@@ -11,6 +11,11 @@ class Branch {
     getCustomers() {
         return this.customers;
     }
+    findCustomer(customerName) {
+        customerName = customerName.toLowerCase().trim();
+        const targetCustomer = this.customers.filter((customer) => customer.getName().toLowerCase().includes(customerName));
+        return targetCustomer;
+    }
     addCustomer(customer) {
         try {
             if (!this.customers.includes(customer)) {
