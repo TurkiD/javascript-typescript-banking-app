@@ -1,7 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const branch_js_1 = require("./branch.js");
-const customer_js_1 = require("./customer.js");
 console.log("++++++++++++++++++++++++++++++++++++Bank System+++++++++++++++++++++++++++++++++++++");
 class Bank {
     constructor(name) {
@@ -95,28 +93,4 @@ class Bank {
         }
     }
 }
-const arizonaBank = new Bank("Arizona");
-const westBranch = new branch_js_1.default("West Branch");
-const sunBranch = new branch_js_1.default("Sun Branch");
-const customer1 = new customer_js_1.default("John", 1);
-const customer2 = new customer_js_1.default("Anna", 2);
-const customer3 = new customer_js_1.default("John", 3);
-arizonaBank.addBranch(westBranch);
-arizonaBank.addBranch(sunBranch);
-arizonaBank.addBranch(westBranch);
-arizonaBank.findBranchByName("bank");
-arizonaBank.findBranchByName("sun");
-arizonaBank.addCustomer(westBranch, customer1);
-arizonaBank.addCustomer(westBranch, customer3);
-arizonaBank.addCustomer(sunBranch, customer1);
-arizonaBank.addCustomer(sunBranch, customer2);
-console.log("-------------------------------------------------------------------");
-console.log(arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 3000));
-console.log(arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 3000));
-console.log(arizonaBank.addCustomerTransaction(westBranch, customer2.getId(), 3000));
-console.log("-------------------------------------------------------------------");
-customer1.addTransaction(-1000);
-console.log("\nThe Balance for customer: " + customer1.getName() + ", is: " + customer1.getBalance() + " SAR\n");
-console.log("-------------------------------------------------------------------");
-arizonaBank.listCustomers(westBranch, true);
-arizonaBank.listCustomers(sunBranch, true);
+exports.default = Bank;
