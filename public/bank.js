@@ -10,16 +10,18 @@ class Bank {
     }
     addBranch(branch) {
         try {
-            if (!this.branches.includes(branch)) {
+            if (!this.checkBranch(branch)) {
                 const result = this.branches.push(branch);
-                result > 0 ? true : false;
-                console.log(`${branch.getName()} Added`);
-                return result;
+                if (result > 0 ? true : false) {
+                    console.log(`${branch.getName()} Added`);
+                    return true;
+                }
             }
             throw `${branch.getName()} Already Exist\n`;
         }
         catch (error) {
             console.log(error);
+            return false;
         }
     }
     findBranchByName(branchName) {
@@ -63,27 +65,33 @@ class Bank {
         }
     }
     listCustomers(branch, includeTransactions) {
-        if (includeTransactions) {
-            // const customers = targetBranch[0].getCustomers();
-            if (this.checkBranch(branch)) {
-                const customers = branch.getCustomers();
-                // Display
-                console.log("Branch:- " + branch.getName() + ":\n");
-                customers.forEach((customer) => {
-                    if (customer.getTransaction().length > 0) {
-                        console.log("Customer Name: " + customer.getName() + ", Customer ID: " + customer.getId());
-                        console.log(customer.getTransaction());
-                    }
-                    else {
-                        -console.log("Customer Name: " + customer.getName() + ", Customer ID: " + customer.getId());
-                        console.log("No Data ara Available");
-                    }
-                });
-                console.log("-------------------------------------------------------------------");
+        try {
+            if (includeTransactions) {
+                // const customers = targetBranch[0].getCustomers();
+                if (this.checkBranch(branch)) {
+                    const customers = branch.getCustomers();
+                    // Display
+                    console.log("Branch:- " + branch.getName() + ":\n");
+                    customers.forEach((customer) => {
+                        if (customer.getTransaction().length > 0) {
+                            console.log("Customer Name: " + customer.getName() + ", Customer ID: " + customer.getId());
+                            console.log(customer.getTransaction());
+                        }
+                        else {
+                            -console.log("Customer Name: " + customer.getName() + ", Customer ID: " + customer.getId());
+                            console.log("No Data ara Available");
+                        }
+                    });
+                    console.log("-------------------------------------------------------------------");
+                }
+            }
+            else {
+                throw "no customers";
             }
         }
-        else {
-            console.log("no customers");
+        catch (error) {
+            console.log(error);
+            return false;
         }
     }
 }

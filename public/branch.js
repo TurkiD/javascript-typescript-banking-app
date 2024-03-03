@@ -25,12 +25,17 @@ class Branch {
         }
     }
     addCustomerTransaction(customerId, amount) {
-        const targetCustomer = this.customers.find((customer) => customer.getId() === customerId);
-        if (targetCustomer) {
-            targetCustomer.addTransaction(amount);
-            return true;
+        try {
+            const targetCustomer = this.customers.find((customer) => customer.getId() === customerId);
+            if (targetCustomer) {
+                return targetCustomer.addTransaction(amount);
+            }
+            else {
+                throw "Customer not exist";
+            }
         }
-        else {
+        catch (error) {
+            console.log(error);
             return false;
         }
     }

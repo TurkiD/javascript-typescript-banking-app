@@ -27,15 +27,18 @@ export default class Branch {
             return false;
         }
     }
-
     addCustomerTransaction (customerId: number, amount: number) {
-        const targetCustomer = this.customers.find(
-            (customer) => customer.getId() === customerId); 
-        if (targetCustomer) {
-            targetCustomer.addTransaction(amount)
-            return true;
-        } else {
-             return false;
+        try {
+            const targetCustomer = this.customers.find(
+                (customer) => customer.getId() === customerId); 
+            if (targetCustomer) {
+                return targetCustomer.addTransaction(amount);
+            } else {
+                throw "Customer not exist"
             }
-        }   
-    }
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+    }   
+}

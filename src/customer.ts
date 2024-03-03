@@ -43,6 +43,7 @@ private transactions: Transaction[]
             }
         } catch (error) {
             console.error(error);
+            return false;
         }
     }
 }
