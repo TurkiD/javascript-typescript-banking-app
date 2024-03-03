@@ -10,7 +10,7 @@ private date: Date;
         this.date = new Date();
     }
     
-    getAmount() {
+    getAmount(): number{
         return this.amount;
     }
 }

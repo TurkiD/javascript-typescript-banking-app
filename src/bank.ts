@@ -9,7 +9,7 @@ private branches: Branch[];
         this.name = name;
     } 
 
-    addBranch(branch: Branch) {
+    addBranch(branch: Branch): boolean {
         try {  
             if (!this.checkBranch(branch)) {
                 const result = this.branches.push(branch);
@@ -25,17 +25,17 @@ private branches: Branch[];
         }
     }
 
-    findBranchByName(branchName: string) {
+    findBranchByName(branchName: string): Branch[] | null{
         branchName = branchName.toLowerCase().trim();
         const targetBranch = this.branches.filter((branch) => branch.getName().toLowerCase().includes(branchName));
         return targetBranch;
     }
 
-    checkBranch(branch: Branch) {
+    checkBranch(branch: Branch): boolean {
         return this.branches.includes(branch)
     }
 
-    addCustomer(branch: Branch, customer: Customer) {
+    addCustomer(branch: Branch, customer: Customer): boolean{
         try {
             if (this.checkBranch(branch)) {
                 const result = branch.addCustomer(customer);
@@ -49,23 +49,28 @@ private branches: Branch[];
         }
     }
 
-    addCustomerTransaction(branch: Branch, customerId: number, amount: number) {
+    addCustomerTransaction(branch: Branch, customerId: number, amount: number): boolean {
         try {
             if (this.checkBranch(branch)) {
                 if (branch.addCustomerTransaction(customerId, amount)) {
-                    return "Transaction Was Successful"
+                    console.log("Transaction Was Successful");
+                    
+                    return true
                 } else {
-                    return `Transaction Failed, You do not have an account in ${branch.getName()}`
+                    console.log(`Transaction Failed, You do not have an account in ${branch.getName()}`);
+                    return false
                 }
             } else {
                 throw "Transactions can not be done duo to unavailabilities of the Branch"
             }
         } catch (error) {
-            return error;
+            console.log(error);
+            
+            return false;
         }
     }
 
-    listCustomers(branch: Branch, includeTransactions: boolean) {
+    listCustomers(branch: Branch, includeTransactions: boolean): void{
         try {
             if (includeTransactions) {
                 // const customers = targetBranch[0].getCustomers();
@@ -90,7 +95,6 @@ private branches: Branch[];
             }
         } catch (error) {
             console.log(error);
-            return false;
         }
     }
 }

@@ -7,23 +7,23 @@ export default class Branch {
     this.name = name;
   }
 
-  getName() {
+  getName(): string {
     return this.name;
   }
 
-  getCustomers() {
+  getCustomers(): Customer[] {
     return this.customers;
   }
 
-  // findCustomer(customerName: string) {
-  //   customerName = customerName.toLowerCase().trim();
-  //   const targetCustomer = this.customers.filter((customer) =>
-  //   customer.getName().toLowerCase().includes(customerName)
-  //   );
-  //   return targetCustomer;
-  // }
+  findCustomer(customerName: string): Customer[]{
+    customerName = customerName.toLowerCase().trim();
+    const targetCustomer = this.customers.filter((customer) =>
+    customer.getName().toLowerCase().includes(customerName)
+    );
+    return targetCustomer;
+  }
 
-  addCustomer(customer: Customer) {
+  addCustomer(customer: Customer): boolean {
     try {
       if (!this.customers.includes(customer)) {
         const result = this.customers.push(customer);
@@ -36,7 +36,7 @@ export default class Branch {
     }
   }
 
-  addCustomerTransaction(customerId: number, amount: number) {
+  addCustomerTransaction(customerId: number, amount: number): boolean {
     try {
       const targetCustomer = this.customers.find(
         (customer) => customer.getId() === customerId

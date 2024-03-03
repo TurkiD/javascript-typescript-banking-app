@@ -48,10 +48,12 @@ class Bank {
         try {
             if (this.checkBranch(branch)) {
                 if (branch.addCustomerTransaction(customerId, amount)) {
-                    return "Transaction Was Successful";
+                    console.log("Transaction Was Successful");
+                    return true;
                 }
                 else {
-                    return `Transaction Failed, You do not have an account in ${branch.getName()}`;
+                    console.log(`Transaction Failed, You do not have an account in ${branch.getName()}`);
+                    return false;
                 }
             }
             else {
@@ -59,7 +61,8 @@ class Bank {
             }
         }
         catch (error) {
-            return error;
+            console.log(error);
+            return false;
         }
     }
     listCustomers(branch, includeTransactions) {
@@ -89,7 +92,6 @@ class Bank {
         }
         catch (error) {
             console.log(error);
-            return false;
         }
     }
 }
